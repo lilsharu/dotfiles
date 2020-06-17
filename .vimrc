@@ -1,83 +1,68 @@
-set number
 syntax on
+
 colorscheme Tomorrow-Night
-set tabstop=4
-set autoindent
+set background=dark
+
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
 set expandtab
-set softtabstop=4
-set cursorline
-filetype indent on
-
-set wildmenu
-set lazyredraw
-set showmatch
-
+set smartindent
+set number
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
 set incsearch
-set hlsearch
-nnoremap <leader><space> :nohlsearch<CR> 
-"This makes , <space> remove highlights from a search
-
-set foldenable
-set foldlevelstart=10
-set foldnestmax=10
-nnoremap <space> za 
-"space upons surrounding folds
-set foldmethod=indent
-
-nnoremap gV `[v`] "highlights last inserted code
 
 inoremap jk <esc>
-nnoremap <leader>u :GundoToggle<CR> 
-"undo \u
-"edit vimrc
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-"Save session and reopen with vim -S
-nnoremap <leader>s :mksession<CR>
 
-"open ag.vim
-nnoremap <leader>a :Ag
-
-"Configuring CtrlP
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_swtich_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor -hidden -g ""'
-
-call pathogen#infect()
-
-"For Specific File Types
-augroup configgroup
-    autocmd!
-    autocmd VimEnter * highlight clear SignColumn
-    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md
-                \:call <SID>StripTrailingWhitespaces()
-    autocmd FileType java setlocal noexpandtab
-    autocmd FileType java setlocal list
-    autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-    autocmd FileType java setlocal formatprg=par\ -w80\ -T4
-    autocmd FileType php setlocal expandtab
-    autocmd FileType php setlocal list
-    autocmd FileType php setlocal listchars=tab:+\ ,eol:-
-    autocmd FileType php setlocal formatprg=par\ -w80\ -T4
-    autocmd FileType ruby setlocal tabstop=2
-    autocmd FileType ruby setlocal shiftwidth=2
-    autocmd FileType ruby setlocal softtabstop=2
-    autocmd FileType ruby setlocal commentstring=#\ %s
-    autocmd FileType python setlocal commentstring=#\ %s
-    autocmd BufEnter *.cls setlocal filetype=java
-    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-    autocmd BufEnter Makefile setlocal noexpandtab
-    autocmd BufEnter *.sh setlocal tabstop=2
-    autocmd BufEnter *.sh setlocal shiftwidth=2
-    autocmd BufEnter *.sh setlocal softtabstop=2
-augroup END
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
-
+    Plug 'jremmen/vim-ripgrep'
+    Plug 'tpope/vim-fugitive'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'vim-utils/vim-man'
+    Plug 'lyuts/vim-rtags'
+    Plug 'https://github.com/kien/ctrlp.vim.git'
+    Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+    Plug 'mbbill/undotree'
     Plug 'junegunn/vim-easy-align'
     Plug 'https://github.com/chrisbra/Colorizer'
-
+    Plug 'lervag/vimtex'
+        let g:tex_flavor='latex'
+        let g:vimtex_view_method='zathura'
+        let g:vimtex_quickfix_mode=0
+        set conceallevel=1
+        let g:tex_conceal='abdmg' 
 call plug#end()
 
+if executable('rg')
+    let g:rg_derive_root='true'
+endif
 
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let mapleader = " "
+let g:netrw_browse_split = 2
+"let g:netrw_banner = 0
+
+let g:ctrlp_use_caching = 0
+let g:netrw_winsize = 25
+
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <silent> <Leader>+ :vertical resize +5<CR>
+nnoremap <silent> <Leader>- :vertical resize -5<CR>
+
+" YCM
+nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gf :YcmCompleter FixIT<CR>
