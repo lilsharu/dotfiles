@@ -29,6 +29,7 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
+    Plug 'chriskempson/base16-vim'
     Plug 'jremmen/vim-ripgrep'
     Plug 'tpope/vim-fugitive'
     Plug 'leafgarland/typescript-vim'
