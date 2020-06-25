@@ -9,6 +9,6 @@ else
 #    cat $TO_ENTER > $FILE_PATH
 #    touch $FILE_PATH
     touch "$FILE_PATH"
-    echo -e $"#include <iostream>\n#include <cstdio>\n\nusing namespace std;\n\nint main {\n\tfreopen(\"${2}.in\", \"r\", stdin);\n\tfreopen(\"${2}.out\", \"w\", stdout);\n\n}"  > "$FILE_PATH"
+    echo -e $"#include <iostream>\n#include <cstdio>\n\nusing namespace std;\n\nint main() {\n\tfreopen(\"${2}.in\", \"r\", stdin);\n\tfreopen(\"${2}.out\", \"w\", stdout);\n\n}"  > "$FILE_PATH"
     vim "$FILE_PATH"
 fi
