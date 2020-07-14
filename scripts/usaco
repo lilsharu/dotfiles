@@ -3,6 +3,10 @@
 FOLDER_PATH="/mnt/c/Users/shour/OneDrive - Livingston Public Schools/USACO/USACO/CPP";
 FILE_PATH="$FOLDER_PATH/$1.cpp"
 
+if [[ $FILE_PATH != *.cpp*]]; then
+    FILE_PATH="$FILE_PATH.cpp"
+fi
+
 if [[ -e $FILE_PATH ]]; then
     echo FILE ALREADY EXISTS
 else
