@@ -12,6 +12,7 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set number
+set background=dark
 set smartcase
 set noswapfile
 set nobackup
@@ -35,6 +36,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
     Plug 'chriskempson/base16-vim'
+    Plug 'morhetz/gruvbox'
     Plug 'jremmen/vim-ripgrep'
     Plug 'tpope/vim-fugitive'
     Plug 'leafgarland/typescript-vim'
@@ -62,7 +64,7 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
-colorscheme base16-gruvbox-dark-hard
+colorscheme gruvbox
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let mapleader = " "
