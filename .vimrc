@@ -22,10 +22,9 @@ set incsearch
 set nowrap
 set termguicolors
 set t_Co=256
+set backspace=indent,eol,start
 
 inoremap jk <esc>
-
-:set backspace=indent,eol,start
 
 map j gj
 map k gk
