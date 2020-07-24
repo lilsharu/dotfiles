@@ -20,16 +20,15 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set nowrap
+set termguicolors
+set t_Co=256
 
 inoremap jk <esc>
 
+:set backspace=indent,eol,start
+
 map j gj
 map k gk
-
-inoremap . .<C-g>u
-inoremap ! !<C-g>u
-inoremap ? ?<C-g>u
-inoremap : :<C-g>u 
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -48,6 +47,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-easy-align'
     Plug 'https://github.com/chrisbra/Colorizer'
     Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'vim-airline/vim-airline'
     Plug 'lervag/vimtex'
         let g:tex_flavor='latex'
         let g:vimtex_view_method='zathura'
@@ -64,7 +64,26 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
+let g:gruvbox_italic=1
 colorscheme gruvbox
+
+
+
+let g:airline_powerline_fonts=1
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let mapleader = " "
