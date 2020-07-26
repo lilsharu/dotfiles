@@ -1,27 +1,34 @@
 call plug#begin()    
+    "Themes
     Plug 'chriskempson/base16-vim'
     Plug 'morhetz/gruvbox'
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    
+    "Navigation
     Plug 'jremmen/vim-ripgrep'
-    Plug 'tpope/vim-fugitive'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'vim-utils/vim-man'
-    Plug 'lyuts/vim-rtags'
+    Plug 'preservim/nerdtree'
     Plug 'https://github.com/kien/ctrlp.vim'
         let g:ctrlp_map = '<c-p>'
         let g:ctrlp_cmd = 'CtrlP'
+    
+    "File Management
     Plug 'mbbill/undotree'
+    Plug 'tpope/vim-fugitive' "Git (:Git)
     Plug 'junegunn/vim-easy-align'
-    Plug 'https://github.com/chrisbra/Colorizer'
-    Plug 'octol/vim-cpp-enhanced-highlight'
+        "Start interactive EasyAlign in visual mode (e.g. vipga)
+        xmap ga <Plug>(EasyAlign)
+
+        "Start interactive EasyAlign for a motion/text object (e.g. gaip)
+        nmap ga <Plug>(EasyAlign)
+    
+    "UI
     Plug 'vim-airline/vim-airline'
-    Plug 'preservim/nerdtree'
-"    Plug 'Shougo/deoplete.nvim'
-"        inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-"        inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-"    Plug 'zchee/deoplete-clang'
-"        let g:deoplete#enable_at_startup = 1
-"        let g:deoplete#sources#clang#libclang_path='/usr/lib/llvm-10/lib/libclang.so'
-"        let g:deoplete#sources#clang#clang_header='/usr/include/clang'
+    Plug 'https://github.com/chrisbra/Colorizer'
+
+    "Autocomplete
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    "LaTeX
     Plug 'lervag/vimtex'
         let g:tex_flavor='latex'
         let g:vimtex_view_method='zathura'
@@ -32,7 +39,6 @@ call plug#begin()
         let g:UltiSnipsExpandTrigger = '<tab>'
         let g:UltiSnipsJumpForwardTrigger = '<tab>'
         let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 filetype plugin indent on
