@@ -1,0 +1,19 @@
+#!/bin/bash
+
+FOLDER_PATH=`dirname $0`
+
+if [[ $1 == *".cpp" ]]; then 
+    FILE_PATH="$FOLDER_PATH/$1"
+else 
+    FILE_PATH="$FOLDER_PATH/$1.cpp"
+fi
+
+if [[ -e $FILE_PATH ]]; then
+    echo FILE ALREADY EXISTS
+else
+#    cat $TO_ENTER > $FILE_PATH
+#    touch $FILE_PATH
+    touch "$FILE_PATH"
+    echo -e $"#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n\n}"  > "$FILE_PATH"
+    nvim "$FILE_PATH"
+fi
