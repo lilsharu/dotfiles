@@ -9,5 +9,5 @@ else
     touch $SCRIPT_FILE
     echo $'#!/bin/bash\n' > $SCRIPT_FILE
     chmod +x $SCRIPT_FILE
-    vim $SCRIPT_FILE
+    nvim $SCRIPT_FILE
 fi

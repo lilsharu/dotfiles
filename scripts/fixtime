@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo ntpdate -sb time.nist.gov  
