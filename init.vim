@@ -6,30 +6,52 @@ call plug#begin()
     
     "Navigation
     Plug 'jremmen/vim-ripgrep'
-    Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
         map ; :Files<CR>
     Plug 'https://github.com/kien/ctrlp.vim'
         let g:ctrlp_map = '<c-p>'
         let g:ctrlp_cmd = 'CtrlP'
-    
+    Plug 'preservim/nerdtree'
+        let g:NERDTreeShowHidden = 1
+        let g:NERDTreeIgnore = []
+        let g:NERDTreeStatusline = ''
+        " Automaticaly close nvim if NERDTree is only thing left open
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
     "File Management
     Plug 'mbbill/undotree'
-    Plug 'tpope/vim-fugitive' "Git (:Git)
     Plug 'junegunn/vim-easy-align'
         "Start interactive EasyAlign in visual mode (e.g. vipga)
         xmap ga <Plug>(EasyAlign)
-
         "Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap ga <Plug>(EasyAlign)
-    
+    "Version Control
+    Plug 'tpope/vim-fugitive' "Git (:Git)
+    Plug 'airblade/vim-gitgutter'
+
     "UI
     Plug 'vim-airline/vim-airline'
     Plug 'https://github.com/chrisbra/Colorizer'
+    Plug 'ryanoasis/vim-devicons' "Icons for NerdTree
 
     "Coding Autocomplete
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        let g:coc_global_extensions = 
+                    \[
+                        \ 'coc-emmet', 
+                        \ 'coc-css', 
+                        \ 'coc-html', 
+                        \ 'coc-json', 
+                        \ 'coc-prettier', 
+                        \ 'coc-tsserver', 
+                        \ 'coc-phpls', 
+                        \ 'coc-python',
+                        \ 'coc-java',
+                        \ 'coc-sh',
+                        \ 'coc-texlab',
+                        \ 'coc-yank'
+                    \]
     Plug 'jiangmiao/auto-pairs'
     Plug 'machakann/vim-sandwich'
 
@@ -46,6 +68,7 @@ call plug#begin()
         let g:UltiSnipsExpandTrigger = '<tab>'
         let g:UltiSnipsJumpForwardTrigger = '<tab>'
         let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
 call plug#end()
 
 filetype plugin indent on
@@ -63,7 +86,7 @@ filetype plugin indent on
     set background=dark
     set backspace=indent,eol,start
     set termguicolors
-    set t_Co=256
+    set relativenumber
 
 "Case-insensitive searching
     set ignorecase
@@ -83,15 +106,23 @@ filetype plugin indent on
     set shortmess+=c
     set signcolumn=yes
 
-"Remap functions
-    inoremap jk <esc>
-    let mapleader = " "
-    vnoremap <TAB> >gv
-    vnoremap <S-TAB> <gv
-
 "Adds Column to signify good line length
     set colorcolumn=80
     highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+"Changes Way Panes are Set Up
+    set splitright
+    set splitbelow
+
+"Customize Terminal in Neovim
+    " start terminal in insert mode
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    " open terminal on ctrl+n
+    function! OpenTerminal()
+        split term://bash
+        resize 10
+    endfunction
+    nnoremap <C-t> :call OpenTerminal()<CR>
 
 "Checks Availibility of RipGrep
     if executable('rg')
@@ -100,6 +131,7 @@ filetype plugin indent on
 
 "Sets up Color Scheme
     let g:gruvbox_italic=1
+    let g:gruvbox_termcolors=256
     colorscheme gruvbox
 
 "Set Up Airline
@@ -117,22 +149,16 @@ filetype plugin indent on
     let g:ctrlp_use_caching = 0
     let g:netrw_winsize = 25
 
-"Window Management
-    nnoremap <leader>h :wincmd h<CR>
-    nnoremap <leader>j :wincmd j<CR>
-    nnoremap <leader>k :wincmd k<CR>
-    nnoremap <leader>l :wincmd l<CR>
-    nnoremap <leader>u :UndotreeShow<CR>
-    map <leader>pv :NERDTreeToggle<CR>
-    nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-    nnoremap <silent> <Leader>- :vertical resize -5<CR>
-    nnoremap <leader>n :tabn<CR>
-    nnoremap <leader>p :tabp<CR>
-    nnoremap <leader>t :tabnew 
-
-"Use RipGrep
-    nnoremap <Leader>ps :Rg<SPACE>
-
+"Set up fzf
+    nnoremap <leader>, :FZF<CR>
+    let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \}
+    let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+    let g:fzf_layout = {'window': {'width': 0.8, 'height': 0.8}}
+    let $FZF_DEFAULT_OPTS='--reverse'
 
 "coc.nvim Config
     inoremap <silent><expr> <C-j>
@@ -218,19 +244,49 @@ filetype plugin indent on
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
     " Using CocList
-    " Show all diagnostics
-    nnoremap <silent> ,a  :<C-u>CocList diagnostics<cr>
-    " Manage extensions
-    nnoremap <silent> ,e  :<C-u>CocList extensions<cr>
-    " Show commands
-    nnoremap <silent> ,c  :<C-u>CocList commands<cr>
-    " Find symbol of current document
-    nnoremap <silent> ,o  :<C-u>CocList outline<cr>
-    " Search workspace symbols
-    nnoremap <silent> ,s  :<C-u>CocList -I symbols<cr>
-    " Do default action for next item.
-    nnoremap <silent> ,j  :<C-u>CocNext<CR>
-    " Do default action for previous item.
-    nnoremap <silent> ,k  :<C-u>CocPrev<CR>
-    " Resume latest coc list
-    nnoremap <silent> ,p  :<C-u>CocListResume<CR>
+        " Show all diagnostics 
+        nnoremap <silent> ,a  :<C-u>CocList diagnostics<cr>
+        " Manage extensions
+        nnoremap <silent> ,e  :<C-u>CocList extensions<cr>
+        " Show commands
+        nnoremap <silent> ,c  :<C-u>CocList commands<cr>
+        " Find symbol of current document
+        nnoremap <silent> ,o  :<C-u>CocList outline<cr>
+        " Search workspace symbols
+        nnoremap <silent> ,s  :<C-u>CocList -I symbols<cr>
+        " Do default action for next item.
+        nnoremap <silent> ,j  :<C-u>CocNext<CR>
+        " Do default action for previous item.
+        nnoremap <silent> ,k  :<C-u>CocPrev<CR>
+        " Resume latest coc list
+        nnoremap <silent> ,p  :<C-u>CocListResume<CR>
+
+"Remap functions
+    inoremap jk <esc>
+    let mapleader = " "
+    nnoremap <TAB><TAB> >>
+    nnoremap <S-TAB><S-TAB> <<
+    nnoremap <S-TAB><TAB> <<
+    "turn terminal to normal mode with jk
+    tnoremap jk <C-\><C-n>
+
+"Shortcut Remaps
+    nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><ESC>
+    imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+
+"Window Management
+    nnoremap <leader>h :wincmd h<CR>
+    nnoremap <leader>j :wincmd j<CR>
+    nnoremap <leader>k :wincmd k<CR>
+    nnoremap <leader>l :wincmd l<CR>
+    nnoremap <leader>u :UndotreeShow<CR>
+    map <leader>pv :NERDTreeToggle<CR>
+    nnoremap <silent> <Leader>+ :vertical resize +5<CR>
+    nnoremap <silent> <Leader>- :vertical resize -5<CR>
+    nnoremap <leader>n :tabn<CR>
+    nnoremap <leader>p :tabp<CR>
+    nnoremap <leader>t :tabnew 
+
+"Use RipGrep
+    nnoremap <Leader>ps :Rg<SPACE>
+
