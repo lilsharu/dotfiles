@@ -50,6 +50,7 @@ call plug#begin()
                         \ 'coc-java',
                         \ 'coc-sh',
                         \ 'coc-texlab',
+                        \ 'coc-clangd',
                         \ 'coc-yank'
                     \]
     Plug 'jiangmiao/auto-pairs'
