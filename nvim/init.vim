@@ -1,11 +1,15 @@
 call plug#begin()    
-    "Themes
+    "Themes and Looks
     Plug 'chriskempson/base16-vim'
     Plug 'morhetz/gruvbox'
     Plug 'octol/vim-cpp-enhanced-highlight'
-    
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim' "Dim Paragraphs above and below
+        nnoremap <C-l> :Limelight!!<CR>
+
     "Navigation
     Plug 'jremmen/vim-ripgrep'
+    Plug 'kshenoy/vim-signature'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
         map ; :Files<CR>
@@ -26,6 +30,7 @@ call plug#begin()
         xmap ga <Plug>(EasyAlign)
         "Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap ga <Plug>(EasyAlign)
+
     "Version Control
     Plug 'tpope/vim-fugitive' "Git (:Git)
     Plug 'airblade/vim-gitgutter'
@@ -64,6 +69,19 @@ call plug#begin()
         set conceallevel=1
         let g:tex_conceal='abdmg' 
 
+    "Markdown
+    Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+        nmap <C-s> <Plug>MarkdownPreview
+        nmap <M-s> <Plug>MarkdownPreviewStop
+        nmap <C-m> <Plug>MarkdownPreviewToggle
+
+    "Python
+    Plug 'vim-scripts/indentpython.vim'
+    Plug 'vim-python/python-syntax'
+        let python_highlight_all=1
+    Plug 'nvie/vim-flake8'
+    
     "Snippets
     Plug 'sirver/ultisnips'
         let g:UltiSnipsExpandTrigger = '<tab>'
@@ -265,9 +283,13 @@ filetype plugin indent on
 "Remap functions
     inoremap jk <esc>
     let mapleader = " "
+    
+    nnoremap <leader>g :Goyo<CR>
+
     nnoremap <TAB><TAB> >>
     nnoremap <S-TAB><S-TAB> <<
     nnoremap <S-TAB><TAB> <<
+
     "turn terminal to normal mode with jk
     tnoremap jk <C-\><C-n>
 
