@@ -72,6 +72,7 @@ call plug#begin()
     "Markdown
     Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+        let g:mkdp_refresh_slow=1
         nmap <C-s> <Plug>MarkdownPreview
         nmap <M-s> <Plug>MarkdownPreviewStop
         nmap <C-m> <Plug>MarkdownPreviewToggle
