@@ -16,12 +16,13 @@ call plug#begin()
     Plug 'https://github.com/kien/ctrlp.vim'
         let g:ctrlp_map = '<c-p>'
         let g:ctrlp_cmd = 'CtrlP'
-    Plug 'preservim/nerdtree'
-        let g:NERDTreeShowHidden = 1
-        let g:NERDTreeIgnore = []
-        let g:NERDTreeStatusline = ''
-        " Automaticaly close nvim if NERDTree is only thing left open
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
+"    Plug 'preservim/nerdtree'
+"        let g:NERDTreeShowHidden = 1
+"        let g:NERDTreeIgnore = []
+"        let g:NERDTreeStatusline = ''
+"        " Automaticaly close nvim if NERDTree is only thing left open
+"        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     "File Management
     Plug 'mbbill/undotree'
@@ -304,7 +305,8 @@ filetype plugin indent on
     nnoremap <leader>k :wincmd k<CR>
     nnoremap <leader>l :wincmd l<CR>
     nnoremap <leader>u :UndotreeShow<CR>
-    map <leader>pv :NERDTreeToggle<CR>
+    map <leader>pv <CMD>CHADopen<CR>
+"    map <leader>pv :NERDTreeToggle<CR>
     nnoremap <silent> <Leader>+ :vertical resize +5<CR>
     nnoremap <silent> <Leader>- :vertical resize -5<CR>
     nnoremap <leader>n :tabn<CR>
