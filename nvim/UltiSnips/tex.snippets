@@ -235,6 +235,18 @@ snippet \( "parenthesis" iA
 \left($1\right)$0
 endsnippet
 
+snippet \\[ "Bracket" iA
+\left[$1\right]$0
+endsnippet
+
 snippet \{ "Brace" iA
 \left{$1\right}$0
+endsnippet
+
+snippet diff "Derivative"
+\diff{$1}{$2}$0
+endsnippet
+
+snippet chain "Chain Rule"
+\diff{${1:y}}{${2:x}} &= \diff{$1}{u}\diff{u}{$2} $0
 endsnippet
