@@ -72,7 +72,7 @@ endsnippet
 
 context "math()"
 snippet sq "\sqrt{}" iA
-\sqrt{${1:${VISUAL}}} $0
+\sqrt{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
@@ -247,6 +247,20 @@ snippet diff "Derivative"
 \diff{$1}{$2}$0
 endsnippet
 
+snippet int  "Integral" i
+\int_{$1}^{$2}{$3}$0
+endsnippet
+
 snippet chain "Chain Rule"
 \diff{${1:y}}{${2:x}} &= \diff{$1}{u}\diff{u}{$2} $0
+endsnippet
+
+context "math()"
+snippet thet "Theta" i
+\theta
+endsnippet
+
+context "math()"
+snippet \mybox "Box" iA
+\mybox{$\mathlarger{$1}$}$0
 endsnippet

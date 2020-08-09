@@ -2,6 +2,7 @@ call plug#begin()
     "Themes and Looks
     Plug 'chriskempson/base16-vim'
     Plug 'morhetz/gruvbox'
+    Plug 'joshdick/onedark.vim'
     Plug 'octol/vim-cpp-enhanced-highlight'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim' "Dim Paragraphs above and below
@@ -59,8 +60,13 @@ call plug#begin()
                         \ 'coc-clangd',
                         \ 'coc-yank'
                     \]
+        command! -nargs=0 Prettier :CocCommand prettier.formatFile
     Plug 'jiangmiao/auto-pairs'
     Plug 'machakann/vim-sandwich'
+    Plug 'preservim/nerdcommenter'
+        let g:NERDCommentEmptyLines = 1
+        let g:NERDToggleCheckAllLines = 1
+        let g:NERDTrimTrailingWhitespace = 1
 
     "LaTeX
     Plug 'lervag/vimtex'
@@ -153,7 +159,7 @@ filetype plugin indent on
 "Sets up Color Scheme
     let g:gruvbox_italic=1
     let g:gruvbox_termcolors=256
-    colorscheme gruvbox
+    colorscheme onedark "gruvbox
 
 "Set Up Airline
     let g:airline_powerline_fonts=1
@@ -180,6 +186,9 @@ filetype plugin indent on
     let $FZF_DEFAULT_COMMAND = 'ag -g ""'
     let g:fzf_layout = {'window': {'width': 0.8, 'height': 0.8}}
     let $FZF_DEFAULT_OPTS='--reverse'
+
+"Some other git stuff
+    map <silent><Leader>z :call setbufvar(winbufnr(popup_atcursor(systemlist("cd " . shellescape(fnamemodify(resolve(expand('%:p')), ":h")) . " && git log --no-merges -n 1 -L " . shellescape(line("v") . "," . line(".") . ":" . resolve(expand("%:p")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
 
 "coc.nvim Config
     inoremap <silent><expr> <C-j>
