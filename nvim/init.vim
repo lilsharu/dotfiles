@@ -11,9 +11,10 @@ call plug#begin()
     "Navigation
     Plug 'jremmen/vim-ripgrep'
     Plug 'kshenoy/vim-signature'
+    Plug 'terryma/vim-multiple-cursors'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-        map ; :Files<CR>
+        map ;; :Files<CR>
     Plug 'https://github.com/kien/ctrlp.vim'
         let g:ctrlp_map = '<c-p>'
         let g:ctrlp_cmd = 'CtrlP'
@@ -27,6 +28,7 @@ call plug#begin()
 
     "File Management
     Plug 'mbbill/undotree'
+    Plug 'tpope/vim-eunuch' "Adds Unix Functionality (:Rename, :Delete, etc)
     Plug 'junegunn/vim-easy-align'
         "Start interactive EasyAlign in visual mode (e.g. vipga)
         xmap ga <Plug>(EasyAlign)
@@ -39,6 +41,8 @@ call plug#begin()
 
     "UI
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+        let g:ailine_extensions = ['branch', 'hunks', 'coc']
     Plug 'https://github.com/chrisbra/Colorizer'
     Plug 'ryanoasis/vim-devicons' "Icons for NerdTree
 
@@ -63,6 +67,7 @@ call plug#begin()
         command! -nargs=0 Prettier :CocCommand prettier.formatFile
     Plug 'jiangmiao/auto-pairs'
     Plug 'machakann/vim-sandwich'
+    Plug 'tpope/vim-surround'
     Plug 'preservim/nerdcommenter'
         let g:NERDCommentEmptyLines = 1
         let g:NERDToggleCheckAllLines = 1
@@ -79,7 +84,9 @@ call plug#begin()
     "Markdown
     Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+        let g:mkdp_auto_start = 1
         let g:mkdp_refresh_slow=1
+        let g:mkdp_highlight_css = '~/.config/nvim/retro.css'
         nmap <C-s> <Plug>MarkdownPreview
         nmap <M-s> <Plug>MarkdownPreviewStop
         nmap <C-m> <Plug>MarkdownPreviewToggle
@@ -89,7 +96,10 @@ call plug#begin()
     Plug 'vim-python/python-syntax'
         let python_highlight_all=1
     Plug 'nvie/vim-flake8'
-    
+        
+    "HTML, CSS, and JavaScript
+    Plug 'mattn/emmet-vim'
+
     "Snippets
     Plug 'sirver/ultisnips'
         let g:UltiSnipsExpandTrigger = '<tab>'
@@ -149,7 +159,7 @@ filetype plugin indent on
         split term://bash
         resize 10
     endfunction
-    nnoremap <C-t> :call OpenTerminal()<CR>
+    nnoremap <M-t> :call OpenTerminal()<CR>
 
 "Checks Availibility of RipGrep
     if executable('rg')
@@ -159,7 +169,7 @@ filetype plugin indent on
 "Sets up Color Scheme
     let g:gruvbox_italic=1
     let g:gruvbox_termcolors=256
-    colorscheme onedark "gruvbox
+    colorscheme gruvbox "onedark gruvbox
 
 "Set Up Airline
     let g:airline_powerline_fonts=1
@@ -297,14 +307,16 @@ filetype plugin indent on
     
     nnoremap <leader>g :Goyo<CR>
 
-    nnoremap <TAB><TAB> >>
-    nnoremap <S-TAB><S-TAB> <<
-    nnoremap <S-TAB><TAB> <<
+    nnoremap <TAB> >>
+    nnoremap <S-TAB> <<
 
     "turn terminal to normal mode with jk
     tnoremap jk <C-\><C-n>
 
-"Shortcut Remaps
+    "Rempas Control-Backspace to delete the previous word in insert mode
+    inoremap <C-_> <C-w>
+
+    "Shortcut Remaps
     nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><ESC>
     imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
@@ -314,8 +326,8 @@ filetype plugin indent on
     nnoremap <leader>k :wincmd k<CR>
     nnoremap <leader>l :wincmd l<CR>
     nnoremap <leader>u :UndotreeShow<CR>
-    map <leader>pv <CMD>CHADopen<CR>
-"    map <leader>pv :NERDTreeToggle<CR>
+    nnoremap <leader>pv <CMD>CHADopen<CR>
+    nnoremap <leader>ppv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
     nnoremap <silent> <Leader>+ :vertical resize +5<CR>
     nnoremap <silent> <Leader>- :vertical resize -5<CR>
     nnoremap <leader>n :tabn<CR>
