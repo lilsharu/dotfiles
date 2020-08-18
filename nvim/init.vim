@@ -14,7 +14,7 @@ call plug#begin()
     Plug 'terryma/vim-multiple-cursors'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-        map <leader>f :Files<CR>
+        map <leader>; :Files<CR>
     Plug 'https://github.com/kien/ctrlp.vim'
         let g:ctrlp_map = '<c-p>'
         let g:ctrlp_cmd = 'CtrlP'
