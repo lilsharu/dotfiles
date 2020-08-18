@@ -2,8 +2,8 @@ call plug#begin()
     "Themes and Looks
     Plug 'chriskempson/base16-vim'
     Plug 'morhetz/gruvbox'
-    Plug 'joshdick/onedark.vim'
     Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'joshdick/onedark.vim'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim' "Dim Paragraphs above and below
         nnoremap <C-l> :Limelight!!<CR>
@@ -14,17 +14,11 @@ call plug#begin()
     Plug 'terryma/vim-multiple-cursors'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-        map ;; :Files<CR>
+        map <leader>f :Files<CR>
     Plug 'https://github.com/kien/ctrlp.vim'
         let g:ctrlp_map = '<c-p>'
         let g:ctrlp_cmd = 'CtrlP'
     Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
-"    Plug 'preservim/nerdtree'
-"        let g:NERDTreeShowHidden = 1
-"        let g:NERDTreeIgnore = []
-"        let g:NERDTreeStatusline = ''
-"        " Automaticaly close nvim if NERDTree is only thing left open
-"        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     "File Management
     Plug 'mbbill/undotree'
@@ -86,7 +80,7 @@ call plug#begin()
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
         let g:mkdp_auto_start = 1
         let g:mkdp_refresh_slow=1
-        let g:mkdp_highlight_css = '~/.config/nvim/retro.css'
+        let g:mkdp_markdown_css = '/home/mastermind/.config/nvim/github-markdown.css'
         nmap <C-s> <Plug>MarkdownPreview
         nmap <M-s> <Plug>MarkdownPreviewStop
         nmap <C-m> <Plug>MarkdownPreviewToggle
@@ -315,6 +309,7 @@ filetype plugin indent on
 
     "Rempas Control-Backspace to delete the previous word in insert mode
     inoremap <C-_> <C-w>
+    inoremap <C-BS> <C-w>
 
     "Shortcut Remaps
     nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><ESC>
