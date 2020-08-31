@@ -11,10 +11,10 @@ call plug#begin()
     "Navigation
     Plug 'jremmen/vim-ripgrep'
     Plug 'kshenoy/vim-signature'
-    Plug 'terryma/vim-multiple-cursors'
+    Plug 'mg979/vim-visual-multi'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-        map <leader>; :Files<CR>
+        map ;; :Files<CR>
     Plug 'https://github.com/kien/ctrlp.vim'
         let g:ctrlp_map = '<c-p>'
         let g:ctrlp_cmd = 'CtrlP'
@@ -23,6 +23,7 @@ call plug#begin()
     "File Management
     Plug 'mbbill/undotree'
     Plug 'tpope/vim-eunuch' "Adds Unix Functionality (:Rename, :Delete, etc)
+    Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
     Plug 'junegunn/vim-easy-align'
         "Start interactive EasyAlign in visual mode (e.g. vipga)
         xmap ga <Plug>(EasyAlign)
@@ -56,7 +57,8 @@ call plug#begin()
                         \ 'coc-sh',
                         \ 'coc-texlab',
                         \ 'coc-clangd',
-                        \ 'coc-yank'
+                        \ 'coc-yank',
+                        \ 'coc-flutter'
                     \]
         command! -nargs=0 Prettier :CocCommand prettier.formatFile
     Plug 'jiangmiao/auto-pairs'
@@ -76,9 +78,7 @@ call plug#begin()
         let g:tex_conceal='abdmg' 
 
     "Markdown
-    Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-        let g:mkdp_auto_start = 1
         let g:mkdp_refresh_slow=1
         let g:mkdp_markdown_css = '/home/mastermind/.config/nvim/github-markdown.css'
         nmap <C-s> <Plug>MarkdownPreview
@@ -93,6 +93,9 @@ call plug#begin()
         
     "HTML, CSS, and JavaScript
     Plug 'mattn/emmet-vim'
+
+    "Dart
+    Plug 'dart-lang/dart-vim-plugin'
 
     "Snippets
     Plug 'sirver/ultisnips'
@@ -144,6 +147,9 @@ filetype plugin indent on
 "Changes Way Panes are Set Up
     set splitright
     set splitbelow
+
+"Automize Removing Whitespace
+autocmd FileType c,cpp,java,php,py autocmd BufWritePre <buffer> %s/\s\+$//e
 
 "Customize Terminal in Neovim
     " start terminal in insert mode
