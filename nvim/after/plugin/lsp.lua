@@ -37,7 +37,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 cmp.setup {
    sources = {
-       { name = "copilot", group_index = 2 },
        { name = 'nvim_lsp' },
    }
 }
