@@ -1,0 +1,16 @@
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+
+yabai -m config layout bsp
+
+# Set all padding and gaps to 10pt (default: 0)
+yabai -m config top_padding    5
+yabai -m config bottom_padding 5
+yabai -m config left_padding   5
+yabai -m config right_padding  5
+yabai -m config window_gap     5
+
