@@ -24,7 +24,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = { 80, 100, 120 }
 
 -- format on save
 vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
