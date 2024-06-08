@@ -1,15 +1,15 @@
 # Plugins
 # Starship Prompt
-if [ type -q starship ]
+if type -q starship
     starship init fish | source
 end
 
 # Zoxide
-if [ type -q zoxide ]
+if type -q zoxide
     zoxide init fish | source
 end
 
 # Pyenv
-if [ type -q pyenv ]
+if type -q pyenv
     pyenv init - | source
 end
