@@ -18,12 +18,14 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.ensure_installed({
-	'tsserver',
-	'eslint',
 	'rust_analyzer',
+    'cmake',
+    'zls',
 	'clangd',
+    'clang-format',
 	'lua_ls',
 	'pyright',
+    'black',
 })
 
 local cmp = require('cmp')
