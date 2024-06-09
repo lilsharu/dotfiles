@@ -22,10 +22,8 @@ lsp.ensure_installed({
     'cmake',
     'zls',
 	'clangd',
-    'clang-format',
 	'lua_ls',
 	'pyright',
-    'black',
 })
 
 local cmp = require('cmp')
