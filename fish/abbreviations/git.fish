@@ -141,4 +141,11 @@ abbr glo 'git log --oneline --decorate'
 abbr glog 'git log --oneline --decorate --graph'
 abbr gloga 'git log --oneline --decorate --graph --all'
 
+# Git Worktree
+abbr gwt 'git worktree'
+abbr gwta 'git worktree add'
+abbr gwtls 'git worktree list'
+abbr gwtmv 'git worktree move'
+abbr gwtrm 'git worktree remove'
+
 
