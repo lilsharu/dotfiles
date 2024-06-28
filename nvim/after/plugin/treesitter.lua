@@ -13,6 +13,9 @@ require("nvim-treesitter.configs").setup({
 		"lua",
 		"rust",
 		"query",
+		"zig",
+		"markdown",
+		"markdown_inline",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
