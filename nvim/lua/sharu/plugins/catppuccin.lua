@@ -2,5 +2,5 @@ return {
 	"catppuccin/nvim",
 	lazy = false,
 	name = "catppuccin",
-	priority = 100,
+	priority = 1000,
 }

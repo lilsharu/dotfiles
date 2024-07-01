@@ -1,6 +1,6 @@
 return {
 	"lunarvim/horizon.nvim",
-	lazy = false,
+	-- lazy = false,
 	name = "horizon",
 	priority = 100,
 }
