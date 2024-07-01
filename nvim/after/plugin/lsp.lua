@@ -22,6 +22,7 @@ end)
 lsp.ensure_installed({
 	"clangd",
 	"cmake",
+	"hls",
 	"lua_ls",
 	"marksman",
 	"pyright",
