@@ -1,3 +1,0 @@
-return {
-	"chentoast/marks.nvim",
-}
